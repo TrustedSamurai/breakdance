@@ -1,0 +1,1 @@
+A series of scripts that will help the developer build their own custom dropdown listboxes from taxonomies related to their custom post type.  Then click the SEARCH button to reload the post loop builder and display matching results.
