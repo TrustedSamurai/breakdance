@@ -1,0 +1,13 @@
+document.getElementById('search_button').addEventListener('click', function() {
+    // Check if all three dropdowns have a selected value other than the default message
+    var surfaceType = document.getElementById('genre-dropdown').value;
+    var finish = document.getElementById('medium-dropdown').value;
+
+    if (surfaceType !== "" && finish !== "" ) {
+        // All dropdowns have a selected value, refresh the page
+        location.reload();
+    } else {
+        // At least one dropdown doesn't have a selected value, display an alert or take other action as needed
+        alert("Please make a selection for all options.");
+    }
+});
