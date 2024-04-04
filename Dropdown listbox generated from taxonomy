@@ -1,0 +1,27 @@
+<?php
+require_once(ABSPATH . 'wp-includes/formatting.php');
+
+// Get the selected 'finish' term from the URL parameter
+$selected_genre = isset($_GET['genre']) ? sanitize_text_field($_GET['genre']) : '';
+
+// Get all terms for the 'finish' taxonomy
+$terms = get_terms( array(
+    'taxonomy' => 'genre',
+    'hide_empty' => false,
+));
+
+// Check if any terms are found
+if ( !empty($terms) && !is_wp_error($terms) ) {
+    echo '<select name="genre" id="genre-dropdown">';
+    echo '<option value="">None Selected</option>';
+    foreach ( $terms as $term ) {
+        $selected = ($term->slug == $selected_genre) ? 'selected' : ''; // Check if the term is selected
+        echo '<option value="' . esc_attr( $term->slug ) . '" ' . $selected . '>' . esc_html( $term->name ) . '</option>';
+    }
+    // If the selected 'genre' term doesn't exist, add an option to select it
+    if ($selected_genre && !get_term_by('slug', $selected_genre, 'genre')) {
+        echo '<option value="' . esc_attr( $selected_genre ) . '" selected>' . esc_html( $selected_genre ) . '</option>';
+    }
+    echo '</select>';
+}
+?>
