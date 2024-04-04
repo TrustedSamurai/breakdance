@@ -1,0 +1,25 @@
+// Check if the 'genre' parameter is set in the URL
+$genre = isset($_GET['genre']) ? sanitize_text_field($_GET['genre']) : '';
+
+// Check if the 'medium' parameter is set in the URL
+$medium = isset($_GET['medium']) ? sanitize_text_field($_GET['medium']) : '';
+
+// Return the modified query array
+return array(
+    'post_type' => 'art', // Set the post type to 'art'
+    'tax_query' => array(
+        'relation' => 'AND', // Adjust the relation based on your requirements
+        array(
+            'taxonomy' => 'genre', // Taxonomy name for genre
+            'field'    => 'slug',
+            'terms'    => $genre,
+            'operator' => 'IN',
+        ),
+        array(
+            'taxonomy' => 'medium', // Taxonomy name for medium
+            'field'    => 'slug',
+            'terms'    => $medium,
+            'operator' => 'IN',
+        ),
+    ),
+);
